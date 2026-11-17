@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Траектория — интерактивная игра-лабиринт с управлением жестами через камеру.">
+    <meta name="theme-color" content="#10091c">
+    <title>Траектория</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="wrapper">
+    <div class="container">
+
+        <header class="app-header glass">
+            <div class="brand">
+                <div class="brand-logo">
+                    <i class="fas fa-hand-sparkles"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Траектория</h1>
+                    <p class="subtitle">Простое управление жестами — быстро и понятно</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="sidebar-tabs">
+            <div class="tab" id="tab-main">
+                <div class="tab-icon"><i class="fas fa-home"></i></div>
+                <span class="tab-text">Главное меню</span>
+            </div>
+            <div class="tab" id="tab-theme">
+                <div class="tab-icon"><i class="fas fa-palette"></i></div>
+                <span class="tab-text">Оттенок сайта</span>
+            </div>
+            <div class="tab" id="tab-leaderboard">
+                <div class="tab-icon"><i class="fas fa-trophy"></i></div>
+                <span class="tab-text">Личные достижения</span>
+            </div>
+            <div class="tab" id="tab-settings">
+                <div class="tab-icon"><i class="fas fa-cog"></i></div>
+                <span class="tab-text">Настройки</span>
+            </div>
+        </div>
+
+        <div class="tab-content-container">
+
+            <div class="tab-panel" id="panel-main">
+                <div class="panel-header">
+                    <h2><i class="fas fa-home"></i> Главное меню</h2>
+                    <button class="close-panel"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="panel-body">
+                    <div class="menu-items">
+                        <div class="menu-item"><i class="fas fa-gamepad"></i><span>Новая игра</span></div>
+                        <div class="menu-item"><i class="fas fa-user-edit"></i><span>Сменить имя</span></div>
+                        <div class="menu-item"><i class="fas fa-question-circle"></i><span>Обучение</span></div>
+                        <div class="menu-item"><i class="fas fa-info-circle"></i><span>О программе</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="panel-theme">
+                <div class="panel-header">
+                    <h2><i class="fas fa-palette"></i> Оттенок сайта</h2>
+                    <button class="close-panel"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="panel-body">
+                    <div class="theme-options">
+                        <div class="theme-option" data-theme="purple">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #a855f7, #d946ef);"></div>
+                            <span>Фиолетовый</span>
+                        </div>
+                        <div class="theme-option" data-theme="blue">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);"></div>
+                            <span>Синий</span>
+                        </div>
+                        <div class="theme-option" data-theme="green">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #10b981, #14b8a6);"></div>
+                            <span>Зелёный</span>
+                        </div>
+                        <div class="theme-option" data-theme="pink">
+                            <div class="theme-preview" style="background: linear-gradient(135deg, #ec4899, #f43f5e);"></div>
+                            <span>Розовый</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-panel" id="panel-leaderboard">
+                <div class="panel-header">
+                    <h2><i class="fas fa-trophy"></i> Личные достижения</h2>
+                    <button class="close-panel"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="panel-body"></div>
+            </div>
+
+            <div class="tab-panel" id="panel-settings">
+                <div class="panel-header">
+                    <h2><i class="fas fa-cog"></i> Настройки</h2>
+                    <button class="close-panel"><i class="fas fa-times"></i></button>
+                </div>
+                <div class="panel-body">
+
+                    <div class="settings-section">
+                        <h3><i class="fas fa-video"></i> Камера</h3>
+                        <div class="settings-row">
+                            <div class="settings-row-label">
+                                <span>Включить камеру</span>
+                                <small>Доступ к видеопотоку</small>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="camera-toggle">
+                                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                            </label>
+                        </div>
+                        <div class="settings-row">
+                            <div class="settings-row-label">
+                                <span>Скелет руки</span>
+                                <small>Показывать точки на камере</small>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="skeleton-toggle" checked>
+                                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3><i class="fas fa-hand-paper"></i> Чувствительность</h3>
+                        <div class="segmented">
+                            <label class="segment"><input type="radio" name="sensitivity" value="low"><span>Низкая</span></label>
+                            <label class="segment"><input type="radio" name="sensitivity" value="medium" checked><span>Средняя</span></label>
+                            <label class="segment"><input type="radio" name="sensitivity" value="high"><span>Высокая</span></label>
+                            <label class="segment"><input type="radio" name="sensitivity" value="very_high"><span>Максимум</span></label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3><i class="fas fa-th"></i> Размер лабиринта</h3>
+                        <div class="segmented">
+                            <label class="segment"><input type="radio" name="cell-size" value="30"><span>Мелкий</span></label>
+                            <label class="segment"><input type="radio" name="cell-size" value="40" checked><span>Стандарт</span></label>
+                            <label class="segment"><input type="radio" name="cell-size" value="50"><span>Крупный</span></label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3><i class="fas fa-volume-up"></i> Звук</h3>
+                        <div class="settings-row">
+                            <div class="settings-row-label">
+                                <span>Звуковые эффекты</span>
+                                <small>Победа, уровень</small>
+                            </div>
+                            <label class="toggle">
+                                <input type="checkbox" id="sound-toggle" checked>
+                                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3><i class="fas fa-broom"></i> Данные</h3>
+                        <button class="settings-danger-btn" id="reset-progress">
+                            <i class="fas fa-trash"></i> Сбросить достижения
+                        </button>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button class="settings-primary-btn" id="reset-settings">
+                            <i class="fas fa-undo-alt"></i> Сбросить настройки
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <div class="action-bar">
+            <button class="action-btn action-btn-primary" id="start-btn">
+                <span class="action-icon"><i class="fas fa-play"></i></span>
+                <span class="action-text">
+                    <strong>Начать игру</strong>
+                    <small>Жесты и стрелки</small>
+                </span>
+            </button>
+            <button class="action-btn action-btn-secondary" id="reset-btn">
+                <span class="action-icon"><i class="fas fa-redo"></i></span>
+                <span class="action-text">
+                    <strong>Сбросить</strong>
+                    <small>Начать заново</small>
+                </span>
+            </button>
+        </div>
+
+        <div class="main-content">
+            <section class="game-section glass">
+                <h2 class="section-title"><i class="fas fa-gamepad"></i> Лабиринт</h2>
+                <div class="maze-container">
+                    <canvas id="maze-canvas"></canvas>
+                </div>
+            </section>
+
+            <section class="camera-section glass">
+                <h2 class="section-title"><i class="fas fa-video"></i> Камера</h2>
+                <div class="camera-container">
+                    <video id="camera-feed" autoplay playsinline muted></video>
+                    <canvas id="hand-overlay" class="hand-overlay"></canvas>
+                </div>
+            </section>
+        </div>
+
+        <div class="controls-panel glass">
+            <h2 class="section-title"><i class="fas fa-hand-rock"></i> Управление жестами</h2>
+
+            <div class="gestures-info">
+                <div class="gesture-card" id="gesture-up">
+                    <div class="gesture-icon"><i class="fas fa-hand-paper"></i></div>
+                    <div class="gesture-text">
+                        <h3>↑ ВВЕРХ</h3>
+                        <p>Поднятая рука (все пальцы вверх)</p>
+                    </div>
+                </div>
+                <div class="gesture-card" id="gesture-down">
+                    <div class="gesture-icon"><i class="fas fa-hand-point-up"></i></div>
+                    <div class="gesture-text">
+                        <h3>↓ ВНИЗ</h3>
+                        <p>Один палец вверх (указательный)</p>
+                    </div>
+                </div>
+                <div class="gesture-card" id="gesture-left">
+                    <div class="gesture-icon"><i class="fas fa-hand-peace"></i></div>
+                    <div class="gesture-text">
+                        <h3>← ВЛЕВО</h3>
+                        <p>Разомкнутая рука (ладонь открыта)</p>
+                    </div>
+                </div>
+                <div class="gesture-card" id="gesture-right">
+                    <div class="gesture-icon"><i class="fas fa-hand-rock"></i></div>
+                    <div class="gesture-text">
+                        <h3>→ ВПРАВО</h3>
+                        <p>Сжатая рука (кулак)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-panel">
+                <div class="stat">
+                    <div class="stat-value" id="time">00:00</div>
+                    <div class="stat-label">Время</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="moves">0</div>
+                    <div class="stat-label">Ходы</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="level">1</div>
+                    <div class="stat-label">Уровень</div>
+                </div>
+            </div>
+
+            <div class="status status-inactive" id="status">
+                <i class="fas fa-exclamation-circle"></i> Камера не активна. Нажмите "Начать игру"
+            </div>
+        </div>
+
+        <div class="keyboard-controls glass">
+            <h3><i class="fas fa-keyboard"></i> Или используйте стрелки</h3>
+            <p>Стрелки ↑↓←→ для движения, клавиши 1–4 для чувствительности</p>
+        </div>
+
+        <div class="tips glass">
+            <h3><i class="fas fa-lightbulb"></i> Советы</h3>
+            <ul>
+                <li>Держите руку на расстоянии 0.5–1 метра от камеры</li>
+                <li>Делайте жесты чётко и держите 1–2 секунды</li>
+                <li>Если жесты не срабатывают — попробуйте изменить чувствительность (клавиши 1–4)</li>
+            </ul>
+        </div>
+
+        <footer>
+            <p>Траектория &copy; 2025–2026 · Дистанционное управление жестами</p>
+        </footer>
+
+        <script src="./index.js" defer></script>
+    </div>
+    </div>
+</body>
+</html>
